@@ -153,6 +153,12 @@ the endpoint and keeps it in the bilingService. Hopefully with have done the sch
 will be the class that fires the automated payment on th 1st of the month, using the
 ScheduledExecutorService as it seems to be a slightly better option compared to Timer.
 
+* A quick update on the first refactoring branch, after reading for a bit regarding exception and
+variables as statements, understood how to write a shorter and simpler function. Refactored the
+bulkInvoicePayment as a general function to deal with invoice lists. Created an specific function
+for pending invoices and updated the rest endpoint to use the previous function. Now, time to work
+in the scheduling function.
+
 
 
 
