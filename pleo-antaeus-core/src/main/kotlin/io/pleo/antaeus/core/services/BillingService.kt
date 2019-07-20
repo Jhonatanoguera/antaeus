@@ -6,10 +6,11 @@ import io.pleo.antaeus.models.InvoiceStatus
 import mu.KotlinLogging
 
 class BillingService(
-    private val paymentProvider: PaymentProvider
+    private val paymentProvider: PaymentProvider,
+    private val invoiceService: InvoiceService
 ) {
 
-    private val logger = KotlinLogging.logger {}
+    // private val logger = KotlinLogging.logger {}
 
     /** Single invoice payment function
      *
@@ -18,18 +19,26 @@ class BillingService(
      */
 
     fun singleInvoicePayment(invoice: Invoice): Invoice {
-       var isValid = false
+       var isValid: Boolean
        try {
            isValid = paymentProvider.charge(invoice)
        }
        catch (e: Exception) {
+           isValid = false
            // Handling exceptions
        }
-       return if (isValid) invoice.copy(status = InvoiceStatus.PAID) else invoice.copy(status =
-       InvoiceStatus.PENDING)
+       return if (isValid) invoice.copy(status = InvoiceStatus.PAID) else invoice
    }
 
-    /** Bulk invoice payment
+    /** Function to pay any invoice flagged as Pending
+     *
+     * @return List of paid invoices
+     */
+    fun pendingInvoicesPayment() : List<Invoice> {
+        return invoiceService.fetchPendingInvoices().map { singleInvoicePayment((it)) }
+    }
+
+    /** Function to pay a list of invoices. Status not considered
      *
      * @param List of Invoices to pay
      * @return List of paid invoices

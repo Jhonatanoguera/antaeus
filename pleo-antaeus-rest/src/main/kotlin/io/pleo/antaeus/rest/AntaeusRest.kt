@@ -93,7 +93,7 @@ class AntaeusRest (
                        path("automation") {
                            // URL: /rest/v1/customers/{:id}
                            get("payments") {
-                               it.json(billingService.bulkInvoicesPayment(invoiceService.fetchPendingInvoices()))
+                               it.json(billingService.pendingInvoicesPayment())
                            }
                        }
                    }
