@@ -159,6 +159,32 @@ bulkInvoicePayment as a general function to deal with invoice lists. Created an 
 for pending invoices and updated the rest endpoint to use the previous function. Now, time to work
 in the scheduling function.
 
+* Added a new service for a runnable task using a schedulerExecutorService. After continuing
+reading, it seems like Timer could have been easier to implement. Same as using Calendar for the
+current date, however, using LocalDate could open possibilities to more accurate information. Note
+the time could also be done with LocalDateTime in case we wanted to set a specific time when to run
+our automated payment method. One thing to point is I'm not 100% sure LocalDate uses a localized
+date/time. Calendar seems to already be localized which is something I'd like to study more before
+changing my mind about LocalDate. Another consideration is that LocalDate is recommended as
+it's part of Java's time and date libraries updated for the Java 8 version which I personally
+enjoyed working with. Lastly, the AntaeusApp,kt has been updated to run a TaskSchedulerService and
+start the scheduler task to be executed.
+
+A few things worth nothing. I am much more comfortable after the refactoring, having that little bug
+going around your mind when you are not satisfied with something made it easier to continue the
+work. I should also point out about my dire need to quickly solve the previous functionality for
+the payment of invoices was mostly due to being used to create test-friendly code. I do am aware of
+not implementing a single unit test yet, however, I've been considering how though would be testing
+the functions, I'm happy with the current results as in a simple Java/Junit/Mockito environment,
+it'll be simple and not require several workarounds. The main object to mock would be the data
+access and services to work with. I expect to implement some unit tests in the upcoming days. As of
+now, the tiered development process is done with the 4th step. Moving onto the 5th.
+
+One little thing, I shall apologize in case someone received a notification regarding a PR. Haven't
+used GitHub in some time already and forgot to select my fork as the base, oops :x
+
+
+
 
 
 
