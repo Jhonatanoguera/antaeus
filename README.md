@@ -180,8 +180,24 @@ it'll be simple and not require several workarounds. The main object to mock wou
 access and services to work with. I expect to implement some unit tests in the upcoming days. As of
 now, the tiered development process is done with the 4th step. Moving onto the 5th.
 
-One little thing, I shall apologize in case someone received a notification regarding a PR. Haven't
-used GitHub in some time already and forgot to select my fork as the base, oops :x
+One little thing, I'm used on creating new branches for the new features to work at and I shall
+apologize in case someone received a notification regarding a PR. Haven't used GitHub in some time
+and forgot to select my fork as the base, oops :x
+
+* Next update, added exception handling which is technically the last step of the project. Also
+enabled the logger I had set in the billingService now that we can expect some sort of exception
+handling. While finishing this exceptions, I decided to add a single invoice payment function which
+receives an Id. Why? Because when exceptions are thrown, we might find in the final list invoices
+that weren't processed. I thought it could be useful to have an option where you could input an Id
+and have the invoice processed in case just one fails. It might be faster than waiting for an
+scheduled task to be executed again in case there are failures. And it isn't only done for this
+single reason. Reading about Pleo, I found there are customers who communicate in Spanish. As
+someone from latino america, payments via internet aren't being used as much as they should
+considering all the existing security mechanisms. Many aren't that fond of online payments and
+prefer to form a line, then pay personally. Although I share the idea of just automating this type
+of payments, you can also find yourself in a position where you want to pay an invoice manually for
+any reason.  It's a very inexpensive function which can brighten the mood of a group of users. This
+can be considered as the starting point for the 6th point
 
 
 
