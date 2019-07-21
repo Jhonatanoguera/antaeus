@@ -199,10 +199,33 @@ of payments, you can also find yourself in a position where you want to pay an i
 any reason.  It's a very inexpensive function which can brighten the mood of a group of users. This
 can be considered as the starting point for the 6th point
 
+* And another update, this time, I explained my mom what Antaeus did and asked for input regarding
+what functionalities would make her happy if she had to use Antaeus. Truth is, most were UI based
+requests lol, however, from some of her ideas I got a couple good ones that can be implemented or
+partially. First, the one which can be the biggest, add non-monthly payment options. It is achieved
+partially as of this log, Customer model has been updated to receive a membership type and a class
+of MembershipType has been created with some options of periodic payment(I am not happy about
+using Trimester AND Quarter payment. Both of thee aren't needed but I sort of realized the
+redundancy after having the updates almost done).
 
+After adding this new field, tables and mappings were updated to handle this and for quick "testing"
+purposes, two rest endpoints were created. Next, a function to add a random membershipType
+was created to populate the database correctly. Another function to retrieve a list of invoices
+based on the pending status and the membershipType was created. The proper data access layer
+function has been also implemented and the rest endpoints are functional with the previous
+mentioned functions. The scheduled task for these periodic membershipTypes haven't been created yet.
+ A joinDate field is required for the customer as this type of memberships are executed from the
+ join date to the specified membership plan.
 
+Another idea to be implemented is adding an account "overflow". Sometimes, when doing manual
+payments, people might want to pay part of the next month's invoice in advance. Adding an overflow
+field to the customer, would deduct from the next month's invoice. I thought of this as a good idea
+which is mostly used by public services over here. Finally, as previously mentioned, email field on
+the user to create an emailing function in case one of the exceptions are triggered during the
+automated payment. Another neat use of the email field would be emailing a few days before the
+automated payment is done, this, to remind the user in case they need to add money to their account.
 
-
-
-
-
+I have also discarded the idea of giving a "maximum pay period" due to the SaaS model business.
+Since you're paying for services in an estimated range of time, is not the best practice to allow a
+few additional days to renew your subscription. This idea will be replaced by the payment reminder
+to implement. Now, I'll get into working on some general tests for the application

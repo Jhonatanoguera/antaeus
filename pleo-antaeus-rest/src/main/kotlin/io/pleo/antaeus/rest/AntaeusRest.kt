@@ -64,6 +64,14 @@ class AntaeusRest (
                            get{
                                it.json(invoiceService.fetchPendingInvoices())
                            }
+
+                           get("semester") {
+                               it.json(invoiceService.fetchPendingSemesterInvoices())
+                           }
+
+                           get("trimester") {
+                               it.json(invoiceService.fetchPendingTrimesterInvoices())
+                           }
                        }
 
                        // URL: /rest/v1/invoices/{:id}
