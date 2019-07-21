@@ -7,16 +7,11 @@
 
 package io.pleo.antaeus.data
 
-import io.pleo.antaeus.models.Currency
-import io.pleo.antaeus.models.Customer
-import io.pleo.antaeus.models.Invoice
-import io.pleo.antaeus.models.InvoiceStatus
-import io.pleo.antaeus.models.Money
-import org.jetbrains.exposed.sql.Database
-import org.jetbrains.exposed.sql.insert
-import org.jetbrains.exposed.sql.select
-import org.jetbrains.exposed.sql.selectAll
+import io.pleo.antaeus.models.*
+import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
+import kotlin.and
+import kotlin.random.Random
 
 class AntaeusDal(private val db: Database) {
     fun fetchInvoice(id: Int): Invoice? {
@@ -51,6 +46,20 @@ class AntaeusDal(private val db: Database) {
         }
     }
 
+    /** Simple override to create a db query based on an InvoiceStatus and MembershipType
+     *
+     * @param status one of the existant status for an invoice
+     * @return List<Invoice> with the filtered invoices by status
+     */
+    fun fetchInvoices(status: InvoiceStatus, membership: MembershipType): List<Invoice> {
+        return transaction(db) {
+            (InvoiceTable innerJoin CustomerTable)
+                    .select { InvoiceTable.customerId.eq(CustomerTable.id) and CustomerTable
+                            .membership.eq(membership.name) and InvoiceTable.status.eq(status.name)}
+                    .map { it.toInvoice() }
+        }
+    }
+
     fun createInvoice(amount: Money, customer: Customer, status: InvoiceStatus = InvoiceStatus.PENDING): Invoice? {
         val id = transaction(db) {
             // Insert the invoice and returns its new id.
@@ -82,11 +91,12 @@ class AntaeusDal(private val db: Database) {
         }
     }
 
-    fun createCustomer(currency: Currency): Customer? {
+    fun createCustomer(currency: Currency, membership: MembershipType): Customer? {
         val id = transaction(db) {
             // Insert the customer and return its new id.
             CustomerTable.insert {
                 it[this.currency] = currency.toString()
+                it[this.membership] = membership.toString()
             } get CustomerTable.id
         }
         return fetchCustomer(id!!)
