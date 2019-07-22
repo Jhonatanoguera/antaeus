@@ -229,3 +229,30 @@ I have also discarded the idea of giving a "maximum pay period" due to the SaaS 
 Since you're paying for services in an estimated range of time, is not the best practice to allow a
 few additional days to renew your subscription. This idea will be replaced by the payment reminder
 to implement. Now, I'll get into working on some general tests for the application
+
+* Okay, last entry on this readMe. First, I have decided to discard the remaining additional ideas
+as they aren't really part of the challenge scope. Having no set time to finish, personally, seems a
+little more concerning to me than having a set deadline as I cannot really measure what could be a
+fair time to send the challenge. It did however, give me time to read more about kotlin, mockk,
+Docker, Javalin and other tips and tricks for Kotlin. Previously to the challenge, I had ventured on
+ reading about the Kotlin language, look for why people liked using and why was it gaining so much
+ support from developers in general. Being relatively new to this industry, I do hope my Antaeus
+ fork can be kept on git for future references on Kotlin experience :) This challenge, did give me
+the final push I needed to dive deep into the language, understand and be able to create something
+with it. The learning curve wasn't that hard to me due to my Java background. Truly, I found Docker
+a little more confusing as I jumped straight into installing and trying to run the app lol. So, I'm
+thankful for being pushed to learn a couple more technologies.
+
+I personally, consider I took quite a good amount of time. The challenge was fairly simple but I
+think I took a very conservative approach wanting to soak myself in the basics of everything and a
+little more before tackling the problem in general. It could be done in less than a work day if you
+aim straight to reach the goal, however and not wanting to excuse, July was a moved month for me and
+the previous weekend I wasn't really available to tackle the challenge. No regrets using my nights
+to work through the challenge even if I had to be coffee-powered the next day as it was very fun to
+me. Also, daily productivity wasn't affected dw, I enjoy developing software, this makes it easy
+to zone out and lose track of the time. However, there's one only little thing I wasn't fond of
+regarding kotlin. I generally like limiting the line length whenever I'm coding, so, sometimes my
+IDE would automatically break down a line and the instruction was marked as unknown. Resulting in
+spending some time searching around if I was missing an import or if there was some issue until
+realizing Kotlin needs the statements to be in the same line to "chain" them. That is, of course, a
+personal preference but the experience overall was fantastic.
